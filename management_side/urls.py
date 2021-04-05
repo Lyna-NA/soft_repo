@@ -15,8 +15,10 @@ urlpatterns = [
     path('issuesList/',views.issuesList),
     path('login/',views.login),
     path('non_returnedBooks/',views.non_returnedBooks),
-    path('profile/',views.profile),
+    path('profileManger/',views.profileManger),
+    path('profileMember/',views.profileMember),
     path('register/',views.register),
     path('membersList/',views.membersList),
     path('managersList/',views.managersList),
+    path('addUser/',views.addUser),
 ]

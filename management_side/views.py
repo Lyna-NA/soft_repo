@@ -41,8 +41,11 @@ def login(request):
 def non_returnedBooks(request):
     return render(request,'admin/non_returnedBooks.html') 
 
-def profile(request):
-    return render(request,'admin/profile.html') 
+def profileManger(request):
+    return render(request,'admin/profileManger.html') 
+
+def profileMember(request):
+    return render(request,'admin/profileMemember.html')
 
 def register(request):
     return render(request,'admin/register.html') 
@@ -52,3 +55,6 @@ def managersList(request):
 
 def membersList(request):
     return render(request,'admin/membersList.html') 
+
+def addUser(request):
+    return render(request,'admin/addUser.html') 
