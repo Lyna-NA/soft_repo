@@ -47,5 +47,8 @@ def profile(request):
 def register(request):
     return render(request,'admin/register.html') 
 
-def table(request):
-    return render(request,'admin/table.html') 
+def managersList(request):
+    return render(request,'admin/managersList.html') 
+
+def membersList(request):
+    return render(request,'admin/membersList.html') 

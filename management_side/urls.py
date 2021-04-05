@@ -17,5 +17,6 @@ urlpatterns = [
     path('non_returnedBooks/',views.non_returnedBooks),
     path('profile/',views.profile),
     path('register/',views.register),
-    path('table/',views.table),
+    path('membersList/',views.membersList),
+    path('managersList/',views.managersList),
 ]
