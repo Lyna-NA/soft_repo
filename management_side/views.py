@@ -1,9 +1,14 @@
 from django.shortcuts import render
 #from django.http import HttpResponse
+from .models import *
 
 # Create your views here.
 def home(request):
-    return render(request,'admin/home.html') 
+    members_num=Member.objects.all().count()
+    books_num=Book.objects.all().count()
+    nonReturned_books_num=Book.objects.all().filter(status='available').count()
+    context={'members_num':members_num,'books_num':books_num,'nonReturned_books_num':nonReturned_books_num}
+    return render(request,'admin/home.html',context) 
 
 def errorPage(request):
     return render(request,'admin/404.html') 
@@ -21,7 +26,8 @@ def blank(request):
     return render(request,'admin/blank.html') 
 
 def booksList(request):
-    return render(request,'admin/booksList.html') 
+    books=Book.objects.all()
+    return render(request,'admin/booksList.html',{'books': books}) 
 
 def catList(request):
     return render(request,'admin/catList.html') 
