@@ -52,9 +52,10 @@ def profileManager(request):
 
 def profileMember(request,pk):   #بتفيد في ال issues
     member =Member.objects.get(id=pk)
-    orders=member.order_set.all()
-    context={'member': member,'orders':orders}
-    return render(request,'admin/profileMember.html',context)
+#    orders=member.order_set.all()
+#    num_order=orders.count()
+ #   context={'member': member,'orders':orders}
+    return render(request,'admin/profileMember.html',{'member':member})
 
 def register(request):
     return render(request,'admin/register.html') 
@@ -63,7 +64,8 @@ def managersList(request):
     return render(request,'admin/managersList.html') 
 
 def membersList(request):
-    return render(request,'admin/membersList.html') 
+    member=Member.objects.all()
+    return render(request,'admin/membersList.html',{'member':member}) 
 
 def addUser(request):
     return render(request,'admin/addUser.html') 

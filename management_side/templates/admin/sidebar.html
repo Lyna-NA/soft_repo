@@ -6,10 +6,16 @@
         </a>
         <hr class="sidebar-divider my-0">
         <ul class="navbar-nav text-light" id="accordionSidebar-1">
-            <li class="nav-item"><a class="nav-link" href="index.html"><i class="fas fa-tachometer-alt"></i><span>Dashboard</span></a></li>
-            <li class="nav-item"><a class="nav-link nav-link collapsed" aria-expanded="false" aria-controls="collapseLayouts" data-bs-toggle="collapse" data-bs-target="#collapseLayouts"><i class="fa fa-book"></i><span>Books</span></a>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'home'%}"><i class="fas fa-tachometer-alt"></i><span>Dashboard</span></a></li>
+            <li class="nav-item">
+                <a class="nav-link nav-link collapsed" aria-expanded="false" aria-controls="collapseLayouts" data-bs-toggle="collapse" data-bs-target="#collapseLayouts"><i class="fa fa-book"></i><span>Books</span></a>
                 <div id="collapseLayouts-2" class="collapse" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
-                    <div class="sb-sidenav-menu-nested nav"><a class="nav-link" href="booksList.html">Menu Accordion</a><a class="nav-link" href="booksList.html">Menu Accordion</a><a class="nav-link" href="addBook.html">Menu Accordion</a></div>
+                    <div class="sb-sidenav-menu-nested nav">
+                        <a class="nav-link"  href="{% url 'booksList'%}" >Menu Accordion</a>
+                        <a class="nav-link" href="booksList.html">Menu Accordion</a>
+                        <a class="nav-link" href="addBook.html">Menu Accordion</a>
+                    </div>
                 </div>
             </li>
             <li class="nav-item"><a class="nav-link nav-link collapsed" href="#" aria-expanded="false" aria-controls="collapseLayouts" data-bs-toggle="collapse" data-bs-target="#collapseLayouts"><i class="fa fa-tags"></i><span>Categories</span></a>
@@ -22,7 +28,7 @@
                     <div class="sb-sidenav-menu-nested nav"><a class="nav-link" href="#">Menu Accordion</a><a class="nav-link" href="#">Menu Accordion</a></div>
                 </div>
             </li>
-            <li class="nav-item"><a class="nav-link" href="booksList.html"><i class="fa fa-users"></i><span>Members</span></a></li>
+            <li class="nav-item"><a class="nav-link"  href="{% url 'membersList'%}"><i class="fa fa-users"></i><span>Members</span></a></li>
             <li class="nav-item"><a class="nav-link" href="booksList.html"><i class="fa fa-gears"></i><span>General Settings</span></a></li>
             <li class="nav-item"><a class="nav-link" href="booksList.html"><i class="fas fa-layer-group"></i><span>New Shelf</span></a></li>
             <li class="nav-item"><a class="nav-link" href="booksList.html"><i class="fas fa-external-link-alt" style="color: #ec8f00 !important;"></i><span style="color: #ec8f00 !important;">Logout</span></a></li>
