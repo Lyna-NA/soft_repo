@@ -70,8 +70,6 @@ def membersList(request):
 def addUser(request):
     return render(request,'admin/addUser.html') 
 
-
-
     # بفيد  في ال issue
     # بقدر اعمل 
     # .book.category متلا
