@@ -4,17 +4,18 @@ from django.db import models
 
 
 class Member(models.Model):
+    GENDER=(('Female','Female'),('Male','Male'))
     username= models.CharField(max_length=50,null=True)
     first_name= models.CharField(max_length=50,null=True)
     last_name= models.CharField(max_length=50,null=True)
-    gender= models.CharField(max_length=50,null=True)
+    gender= models.CharField(max_length=50,null=True,choices=GENDER)
     email= models.CharField( max_length=50,null=True)
     city= models.CharField( max_length=50,null=True)
     country= models.CharField( max_length=50,null=True)
     address= models.CharField( max_length=50,null=True)    
-    date_created= models.DateTimeField(auto_now=False, auto_now_add=False)
+    date_created= models.DateTimeField(auto_now=False, auto_now_add=True)
     def __str__(self):
-        return self.name
+        return self.username
 
 class Tag(models.Model):
     name= models.CharField(max_length=50,null=True)

@@ -47,11 +47,14 @@ def login(request):
 def non_returnedBooks(request):
     return render(request,'admin/non_returnedBooks.html') 
 
-def profileManger(request):
-    return render(request,'admin/profileManger.html') 
+def profileManager(request):
+    return render(request,'admin/profileManager.html') 
 
-def profileMember(request):
-    return render(request,'admin/profileMemember.html')
+def profileMember(request,pk):   #بتفيد في ال issues
+    member =Member.objects.get(id=pk)
+    orders=member.order_set.all()
+    context={'member': member,'orders':orders}
+    return render(request,'admin/profileMember.html',context)
 
 def register(request):
     return render(request,'admin/register.html') 
@@ -64,3 +67,9 @@ def membersList(request):
 
 def addUser(request):
     return render(request,'admin/addUser.html') 
+
+
+
+    # بفيد  في ال issue
+    # بقدر اعمل 
+    # .book.category متلا
