@@ -1,6 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
+
 #from django.http import HttpResponse
 from .models import *
+from .forms import IssueForm
 
 # Create your views here.
 def home(request):
@@ -33,7 +35,17 @@ def catList(request):
     return render(request,'admin/catList.html') 
 
 def createIssue(request):
-    return render(request,'admin/createIssue.html') 
+    form=IssueForm()
+    if request.method=='POST':
+   #     print(request.POST)
+        form=IssueForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('/')
+             
+
+    context={'form':form}
+    return render(request,'admin/createIssue.html',context) 
 
 def forgot_password(request):
     return render(request,'admin/forgot-password.html') 
