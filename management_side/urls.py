@@ -12,6 +12,7 @@ urlpatterns = [
     path('catList/',views.catList,name="catList"),
     path('createIssue/',views.createIssue,name="createIssue"),
     path('updateIssue/<str:pk>/',views.updateIssue,name="updateIssue"),
+    path('deleteIssue/<str:pk>/',views.deleteIssue,name="deleteIssue"),
     path('forgot_password/',views.forgot_password,name="forgot_password"),
     path('issuesList/',views.issuesList,name="issuesList"),
     path('login/',views.login,name="login"),

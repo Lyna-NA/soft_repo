@@ -54,6 +54,13 @@ def updateIssue(request,pk):
     context={'form':form}
     return render(request,'admin/createIssue.html',context) 
 
+def deleteIssue(request,pk):
+    issue=Issue.objects.get(id=pk)
+    if request.method=='POST':
+        issue.delete()
+    context={'issue':issue}
+    return render(request,'admin/deleteIssue.html',context) 
+
 def forgot_password(request):
     return render(request,'admin/forgot-password.html') 
 
