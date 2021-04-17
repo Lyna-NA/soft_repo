@@ -50,28 +50,16 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
+                                                {%for item in issues%}
                                                 <tr>
-                                                    <td>Caesar Vance</td>
-                                                    <td>Pre-Sales Support</td>
-                                                    <td>New York</td>
-                                                    <td>21</td>
-                                                    <td>New York</td>
-                                                    <td>2011/12/12<br></td>
-                                                    <td>2011/12/12<br></td>
-                                                    <td>$106,450</td>
-                                                    <td class="text-center"><a class="btn btn-danger" role="button" style="margin: 2px;background: #810000;"><i class="fas fa-trash"></i></a></td>
+                                                    <td>{{item.member}}</td>
+                                                    <td>{{item.book}}</td>
+                                                    <td>{{item.tag}}</td>
+                                                    <td>{{item.status}}</td>
+                                                    <td>{{item.date_created}}</td>
+                                                    <td class="text-center"><a href= {% url 'updateIssue' item.id %} class="btn btn-success" role="button" style="background: #002907;margin: 2px;"><i class="fas fa-pencil-alt"></i></a><a class="btn btn-danger" role="button" style="margin: 2px;background: #810000;"><i class="fas fa-trash"></i></a></td>
                                                 </tr>
-                                                <tr>
-                                                    <td>Cedric Kelly</td>
-                                                    <td>Senior JavaScript Developer</td>
-                                                    <td>Edinburgh</td>
-                                                    <td>22</td>
-                                                    <td>New York</td>
-                                                    <td>2012/03/29<br></td>
-                                                    <td>2011/12/12<br></td>
-                                                    <td>$433,060</td>
-                                                    <td class="text-center"><a class="btn btn-danger" role="button" style="margin: 2px;background: #810000;"><i class="fas fa-trash"></i></a></td>
-                                                </tr>
+                                                {% endfor%}
                                             </tbody>
                                         </table>
                                     </div>

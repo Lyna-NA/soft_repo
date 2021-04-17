@@ -11,6 +11,7 @@ urlpatterns = [
     path('booksList/',views.booksList,name="booksList"),
     path('catList/',views.catList,name="catList"),
     path('createIssue/',views.createIssue,name="createIssue"),
+    path('updateIssue/<str:pk>/',views.updateIssue,name="updateIssue"),
     path('forgot_password/',views.forgot_password,name="forgot_password"),
     path('issuesList/',views.issuesList,name="issuesList"),
     path('login/',views.login,name="login"),

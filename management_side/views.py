@@ -37,13 +37,20 @@ def catList(request):
 def createIssue(request):
     form=IssueForm()
     if request.method=='POST':
-   #     print(request.POST)
         form=IssueForm(request.POST)
         if form.is_valid():
             form.save()
             return redirect('/')
-             
+    context={'form':form}
+    return render(request,'admin/createIssue.html',context) 
 
+def updateIssue(request,pk):
+    issue=Issue.objects.get(id=pk)
+    form=IssueForm(instance=issue)
+    if request.method=='POST':
+        form=IssueForm(request.POST,instance=issue)
+        if form.is_valid():
+            form.save()
     context={'form':form}
     return render(request,'admin/createIssue.html',context) 
 
@@ -51,7 +58,9 @@ def forgot_password(request):
     return render(request,'admin/forgot-password.html') 
 
 def issuesList(request):
-    return render(request,'admin/issuesList.html') 
+    issues=Issue.objects.all()
+    context={'issues':issues}
+    return render(request,'admin/issuesList.html',context) 
 
 def login(request):
     return render(request,'admin/login.html') 
