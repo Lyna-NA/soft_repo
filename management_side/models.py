@@ -45,17 +45,9 @@ class Issue(models.Model):
         ('delivered','delivered'),
         ('out of date','out of date'),
     )
-    member=models.ForeignKey(Member,null=True,on_delete =models.SET_NULL) #بنفعش ال اوردر يروح  ل كذ كاستمر ولا بنفع الاوردر نفسه يكون لكذا كتاب =one to many
+    member=models.ForeignKey(Member,null=True,on_delete =models.SET_NULL) 
     book=models.ForeignKey(Book,null=True,on_delete =models.SET_NULL)
     tag=models.ManyToManyField(Tag)
     status =models.CharField(max_length=50,null=True,choices=STATUS)
     date_created= models.DateTimeField(auto_now_add=True)
-
-
-# ال فورن كي بيكون ضكن ال اي دي للجدول تبع  الاوردر يعني بنفعش يتكرروا لنفس الاوردر
-# يعني الاوردر الواحد بيكون لكتاب واحد  و بخص كاستمر واحد  بس 
-# يعني الاوردر بيروحش لكذا حدا و لا بيكون لكذا كتاب 
-# بس الكاستمر بيروح لكذا اوردر و الكتاب كمان ممكن ينطلب من كذا حدا
-# يعني one to many 
-#من جهة الكاستر و من جهة ال بوكس
 
