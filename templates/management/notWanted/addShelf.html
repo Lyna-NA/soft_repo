@@ -1,0 +1,41 @@
+{%extends 'management/main.html'%}
+{% load static %}
+
+{% block content%}
+    <div class="d-flex flex-column" id="content-wrapper">
+        <div id="content">
+            {%include 'management/navbar.html'%}
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12 col-sm-6 col-md-6">
+                        <h3 class="text-dark mb-4" style="color: rgb(90, 92, 105);">SHELF</h3>
+                    </div>
+                </div>
+                <div class="card" id="TableSorterCard">
+                    <div class="card-header py-3">
+                        <div class="row table-topper align-items-center">
+                            <div class="col-12 col-sm-5 col-md-6 text-start" style="margin: 0px;padding: 5px 15px;">
+                                <p class="text-primary m-0 fw-bold" style="color: rgb(236,143,0) !important;">Add New Shelf</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <section class="newsletter-subscribe">
+                <div class="container">
+                    <form class="d-flex justify-content-center flex-wrap" method="post">
+                        <div class="dropdown"><button class="btn btn-secondary dropdown-toggle" type="button" aria-haspopup="true" aria-expanded="false" data-bs-toggle="dropdown" style="color: rgb(133,135,150);width: 500px;border: 1px solid rgb(133,135,150) ;border-top-width: 1px;border-top-color: rgb(133, 135, 150);border-right-width: 1px;border-bottom-width: 1px;border-left-width: 1px;">choose the Floor&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</button>
+                            <div class="dropdown-menu"><input class="form-control form-control dropdown-search-input" type="text" placeholder="Search.."><a class="dropdown-item" href="#">Angular</a><a class="dropdown-item" href="#">Java</a><a class="dropdown-item" href="#">JavaScript</a></div>
+                        </div>
+                        <div class="dropdown"><button class="btn btn-secondary dropdown-toggle" type="button" aria-haspopup="true" aria-expanded="false" data-bs-toggle="dropdown" style="color: rgb(133,135,150);width: 500px;border: 1px solid rgb(133,135,150) ;border-top-width: 1px;border-top-color: rgb(133, 135, 150);border-right-width: 1px;border-bottom-width: 1px;border-left-width: 1px;">choose the Category&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</button>
+                            <div class="dropdown-menu"><input class="form-control form-control dropdown-search-input" type="text" placeholder="Search.."><a class="dropdown-item" href="#">Angular</a><a class="dropdown-item" href="#">Java</a><a class="dropdown-item" href="#">JavaScript</a></div>
+                        </div>
+                        <div class="mb-3"><button class="btn btn-primary" type="submit"style="border-color: rgb(236,143,0)!important;background: rgb(236,143,0)!important;">Add shelf</button></div>
+                    </form>
+                </div>
+            </section>
+        </div>
+        {%include 'management/footer.html'%}
+    </div>
+    <a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
+{% endblock%}

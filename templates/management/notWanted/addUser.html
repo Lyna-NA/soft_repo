@@ -1,0 +1,74 @@
+{%extends 'management/main.html'%}
+{% load static %}
+
+{% block content%}
+
+    <div class="d-flex flex-column" id="content-wrapper">
+        <div id="content">
+            {%include 'management/navbar.html'%}
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12 col-sm-6 col-md-6">
+                        <h3 class="text-dark mb-4" style="color: rgb(90, 92, 105);">Users</h3>
+                    </div>
+                </div>
+                <div class="card" id="TableSorterCard">
+                    <div class="card-header py-3">
+                        <div class="row table-topper align-items-center">
+                            <div class="col-12 col-sm-5 col-md-6 text-start" style="margin: 0px;padding: 5px 15px;">
+                                <p class="text-primary m-0 fw-bold" style="color: rgb(236,143,0) !important;">Add New User</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container-fluid">
+                <div class="row mb-3">
+                    <div class="col-lg-4">
+                        <div class="card mb-3">
+                            <div class="card-body text-center shadow"><img class="rounded-circle mb-3 mt-4" src="{%static 'img/dogs/image2.jpeg'%}" width="160" height="160"></div>
+                        </div>
+                    </div>
+                    <div class="col-lg-8">
+                        <div class="row">
+                            <div class="col">
+                                <div class="card shadow mb-3">
+                                    <div class="card-header py-3">
+                                        <p class="text-primary m-0 fw-bold" style="color: #ec8f00 !important;">User Info</p>
+                                    </div>
+                                    <div class="card-body">
+                                        <form>
+                                            <div class="row">
+                                                <div class="col">
+                                                    <div class="form-group mb-3"><label class="form-label" for="username"><strong>Username</strong></label><input class="form-control" type="text" id="username" placeholder="user.name" name="username"></div>
+                                                </div>
+                                                <div class="col">
+                                                    <div class="form-group mb-3"><label class="form-label" for="role"><strong>Role</strong></label><input class="form-control" type="text" id="role" placeholder="member/manager" name="role"></div>
+                                                </div>
+                                                <div class="form-group mb-3"><label class="form-label" for="email"><strong>Email Address</strong></label><input class="form-control" type="email" id="email" placeholder="user@example.com" name="email"></div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col">
+                                                    <div class="form-group mb-3"><label class="form-label" for="first_name"><strong>First Name</strong></label><input class="form-control" type="text" id="first_name" placeholder="John" name="first_name"></div>
+                                                </div>
+                                                <div class="col">
+                                                    <div class="form-group mb-3"><label class="form-label" for="last_name"><strong>Last Name</strong></label><input class="form-control" type="text" id="last_name" placeholder="Doe" name="last_name"></div>
+                                                </div>
+                                                <div class="col">
+                                                    <div class="form-group mb-3"><label class="form-label" for="last_name"><strong>working_floor</strong></label><input class="form-control" type="text" id="working_floor" placeholder="1st" name="working_floor"></div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group mb-3"><button class="btn btn-primary btn-sm" type="submit" style="background: #ec8f00;border-color: #ec8f00;">Add User</button></div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {%include 'management/footer.html'%}
+    </div>
+    <a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
+{% endblock%}
