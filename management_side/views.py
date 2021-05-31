@@ -146,6 +146,8 @@ def customerProfile(request):
             form.save() 
     return render(request,'management/customerProfile.html',{'form':form})
 
+
+
 def profile(request):   
     group =  request.user.groups.all()[0].name
     print(group)
