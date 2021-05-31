@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect
 from .models import *
-from .forms import IssueForm
+from .forms import IssueForm,CustomerForm
 from django.contrib.auth.decorators import  login_required
 from registration.decorators import allowedUsers 
 
@@ -139,7 +139,12 @@ def customerProfile(request):
 #    orders=member.order_set.all()
 #    num_order=orders.count()
  #   context={'member': member,'orders':orders}
-    return render(request,'management/customerProfile.html',{'customer':customer})
+    form = CustomerForm(instance=customer)
+    if request.method == 'POST': 
+        form = CustomerForm(request.POST , request.FILES, instance=customer)
+        if form.is_valid():
+            form.save() 
+    return render(request,'management/customerProfile.html',{'form':form})
 
 def profile(request):   
     group =  request.user.groups.all()[0].name

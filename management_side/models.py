@@ -5,6 +5,7 @@ from django.contrib.auth.models import User
 
 class Customer(models.Model):
     user = models.OneToOneField(User,null=True, on_delete=models.CASCADE)
+    image=models.ImageField(blank=True, null=True,default="person.png")
     GENDER=(('Female','Female'),('Male','Male'))
     username= models.CharField(max_length=50,null=True)
     first_name= models.CharField(max_length=50,null=True)
