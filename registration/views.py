@@ -1,43 +1,122 @@
 from django.shortcuts import render,redirect
+from django.views.generic import View
+from .forms import CreateNewUser
 from django.contrib import messages
-from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth import authenticate ,login  , logout 
-from django.contrib.auth.decorators import  login_required
-#from .decorators import notLoggedUsers , allowedUsers, formanagements
+from django.contrib.auth.models import User
+from django.contrib.auth import login,logout,authenticate
+from .decorators import notLoggedUsers , allowedUsers#, formanagements
 from django.contrib.auth.models import Group
 
-# Create your views here.
 
-##########################################################################################################3
-# auth 
-#@notLoggedUsers
-# def register(request):   
-#             form = CreateNewUser()
-#             if request.method == 'POST': 
-#                    form = CreateNewUser(request.POST)
-#                    if form.is_valid():
 
-#                        recaptcha_response = request.POST.get('g-recaptcha-response')
-#                        data = {
-#                            'secret' : settings.GOOGLE_RECAPTCHA_SECRET_KEY,
-#                            'response' : recaptcha_response
-#                        }
-#                        r = requests.post('https://www.google.com/recaptcha/api/siteverify',data=data)
-#                        result = r.json()
-#                        if result['success']:
-#                            user = form.save()
-#                            username = form.cleaned_data.get('username')
-#                            messages.success(request , username + ' Created Successfully !')
-#                            return redirect('login')
-#                        else:
-#                           messages.error(request ,  ' invalid Recaptcha please try again!')  
- 
+# class RegisterationView(View):
+    
+#     def get( self , request):
+#         return render (request , 'registration/auth/register.html')
+#     def post( self , request):
+#         context = {
+#         'data' : request.POST,
+#         'has_error':False
+#         }
+
+#         username = request.POST.get('username')
+#         email = request.POST.get('email')
+#         password = request.POST.get('password')
+#         password2 = request.POST.get('password2')
+
+#         # if not validate_email(email):
+#         #     messages.add_message(request,messages.ERROR,'please provide valid email ')
+#         #     context ['has_error']=True
+
+#         if len(password)<8:
+#             messages.add_message(request,messages.ERROR,'your password less than 8 character  ')
+#             context ['has_error']=True
+
+#         if password != password2:
+#             messages.add_message(request,messages.ERROR,'your passwords does not match  ')
+#             context ['has_error']=True
+#         try:
+
+#            if User.objects.get(email=email):
+
+#                messages.add_message(request,messages.ERROR,'email is taken ')
+#                context ['has_error']=True
+#         except Exception as identifier:
+#             pass
+
+#         try:
+
+#            if User.objects.get(username=username):
+#                messages.add_message(request,messages.ERROR,'username is taken ')
+#                context ['has_error']=True
+#         except Exception as identifier:
+#             pass
         
-#             context = {'form':form}
+#         if context ['has_error']:
 
-#             return render(request , 'bookstore/register.html', context )
+#             return render (request , 'registration/auth/register.html',context)
 
-def userLogin(request):  
+#         user =User.objects.create_user(username=username,email=email)
+#         user.set_password(password)
+#         user.is_active = False
+#         user.save()
+
+#         messages.add_message(request,messages.SUCCESS,'user is created ')
+#         return redirect('register')
+
+
+# class loginView(View):
+#     def get(self, request):
+#         return render(request, 'registration/auth/login.html')
+
+#     def post(self, request):
+#         context = {
+#             'data': request.POST,
+#             'has_error': False
+#         }
+#         username = request.POST.get('username')
+#         password = request.POST.get('password')
+#         if username == '':
+#             messages.add_message(request, messages.ERROR,
+#                                  'Username is required')
+#             context['has_error'] = True
+#         if password == '':
+#             messages.add_message(request, messages.ERROR,
+#                                  'Password is required')
+#             context['has_error'] = True
+#         user = authenticate(request, username=username, password=password)
+
+#         if  user :
+#             messages.add_message(request, messages.ERROR, 'Invalid login')
+#             context['has_error'] = True
+
+#         if context['has_error']:
+#             return render(request, 'registration/auth/login.html', status=401, context=context)
+#         login(request, user)
+        
+#         return redirect('home')
+
+@notLoggedUsers
+def register(request):   
+    form = CreateNewUser()
+    if request.method == 'POST': 
+        form = CreateNewUser(request.POST)
+        if form.is_valid():
+            user=form.save()
+            username=form.cleaned_data.get('username')
+            group =Group.objects.get(name='customer')
+            user.groups.add(group)            
+            messages.success(request , username + ' Created Successfully !')
+            return redirect('login')
+        else:
+            messages.error(request ,  ' invalid Recaptcha please try again!')  
+
+    context = {'form':form}
+    return render(request , 'registration/auth/register.html', context )
+
+
+@notLoggedUsers
+def loginView(request):  
  
     if request.method == 'POST': 
         username = request.POST.get('username')
@@ -53,44 +132,10 @@ def userLogin(request):
 
     return render(request , 'registration/auth/login.html', context )
 
-#@notLoggedUsers
-# def userLogin(request):  
-    
-#     def get(self, request):
-#         return render(request, 'authentication/auth/login.html')
 
-#     def post(self, request):
-#         context = {
-#             'data': request.POST,
-#             'has_error': False
-#         }
-#         username = request.POST.get('username')
-#         password = request.POST.get('password')
-
-#         if username == '':
-#             messages.add_message(request, messages.ERROR,'Username is required')
-#             context['has_error'] = True
-
-#         if password == '':
-#             messages.add_message(request, messages.ERROR,'Password is required')
-#             context['has_error'] = True
-
-#         user = authenticate(request, username=username, password=password)
-
-#         if not user : #not registered one
-#             messages.add_message(request, messages.ERROR, 'Invalid login')
-#             context['has_error'] = True
-
-#         if context['has_error']:
-#             return render(request, 'authentication/auth/login.html', status=401, context=context)
-
-#         login(request, user)
-#         return redirect('home')
-
-
-# def userLogout(request):  
-#     logout(request)
-#     return redirect('login') 
+def userLogout(request):  
+    logout(request)
+    return redirect('login') 
 
 
 # @login_required(login_url='login')

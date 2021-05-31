@@ -2,9 +2,9 @@ from django.contrib import admin
 
 # Register your models here.
 
-from .models import Member,Book,Issue,Tag
+from .models import *
 
-admin.site.register(Member)
+admin.site.register(Customer)
 admin.site.register(Book)
 admin.site.register(Issue)
 admin.site.register(Tag)

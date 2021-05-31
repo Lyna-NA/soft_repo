@@ -1,9 +1,10 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 # Create your models here.
 
-
-class Member(models.Model):
+class Customer(models.Model):
+    user = models.OneToOneField(User,null=True, on_delete=models.CASCADE)
     GENDER=(('Female','Female'),('Male','Male'))
     username= models.CharField(max_length=50,null=True)
     first_name= models.CharField(max_length=50,null=True)
@@ -45,7 +46,7 @@ class Issue(models.Model):
         ('delivered','delivered'),
         ('out of date','out of date'),
     )
-    member=models.ForeignKey(Member,null=True,on_delete =models.SET_NULL) 
+  #  customer=models.ForeignKey(Customer,null=True,on_delete =models.SET_NULL) 
     book=models.ForeignKey(Book,null=True,on_delete =models.SET_NULL)
     tag=models.ManyToManyField(Tag)
     status =models.CharField(max_length=50,null=True,choices=STATUS)

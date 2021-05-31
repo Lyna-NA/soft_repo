@@ -2,26 +2,27 @@ from django.shortcuts import render,redirect
 from .models import *
 from .forms import IssueForm
 from django.contrib.auth.decorators import  login_required
-
+from registration.decorators import allowedUsers 
 
 @login_required(login_url='login')
-# #@allowedUsers(allowedGroups=['management'])
+@allowedUsers(allowedGroups=['manager','admin'])
 #@formanagements
 def home(request):
-    members_num=Member.objects.all().count()
+    customers_num=Customer.objects.all().count()
     books_num=Book.objects.all().count()
     nonReturned_books_num=Book.objects.all().filter(status='available').count()
-    context={'members_num':members_num,'books_num':books_num,'nonReturned_books_num':nonReturned_books_num}
+    context={'customers_num':customers_num,'books_num':books_num,'nonReturned_books_num':nonReturned_books_num}
     return render(request,'management/home.html',context) 
+
 
 def errorPage(request):
     return render(request,'management/404.html') 
 
-# def addBook(request):
-#     return render(request,'management/addBook.html') 
+def addBook(request):
+    return render(request,'management/addBook.html') 
 
-# def addCat(request):
-#     return render(request,'management/addCat.html') 
+def addCat(request):
+    return render(request,'management/addCat.html') 
 
 # def addShelf(request):
 #     return render(request,'management/addShelf.html') 
@@ -36,6 +37,9 @@ def booksList(request):
 def catList(request):
     return render(request,'management/catList.html') 
 
+
+@login_required(login_url='login')
+@allowedUsers(allowedGroups=['manager'])
 def createIssue(request):
     form=IssueForm()
     if request.method=='POST':
@@ -46,6 +50,9 @@ def createIssue(request):
     context={'form':form}
     return render(request,'management/createIssue.html',context) 
 
+
+@login_required(login_url='login')
+@allowedUsers(allowedGroups=['manager'])
 def updateIssue(request,pk):
     issue=Issue.objects.get(id=pk)
     form=IssueForm(instance=issue)
@@ -56,6 +63,9 @@ def updateIssue(request,pk):
     context={'form':form}
     return render(request,'management/createIssue.html',context) 
 
+
+@login_required(login_url='login')
+@allowedUsers(allowedGroups=['manager','admin'])
 def deleteIssue(request,pk):
     issue=Issue.objects.get(id=pk)
     if request.method=='POST':
@@ -63,44 +73,78 @@ def deleteIssue(request,pk):
     context={'issue':issue}
     return render(request,'management/deleteIssue.html',context) 
 
+
 def forgot_password(request):
     return render(request,'management/forgot-password.html') 
 
+
+@login_required(login_url='login')
+@allowedUsers(allowedGroups=['manager'])
 def issuesList(request):
     issues=Issue.objects.all()
     context={'issues':issues}
     return render(request,'management/issuesList.html',context) 
 
+@allowedUsers(allowedGroups=['manager'])
 def managersList(request):
     managers=Issue.objects.all()
     context={'managers':managers}
     return render(request,'management/managersList.html',context) 
 
+
+@allowedUsers(allowedGroups=['manager','admin'])
+def customersList(request):
+    customer=Issue.objects.all()
+    context={'customer':customer}
+    return render(request,'management/customersList.html',context) 
+
+
+
 # def login(request):
 #     return render(request,'management/login.html') 
 
+
+@login_required(login_url='login')
+@allowedUsers(allowedGroups=['manager'])
 def non_returnedBooks(request):
     return render(request,'management/non_returnedBooks.html') 
 
-def profileManager(request):
-    return render(request,'management/profileManager.html') 
 
-def profileMember(request,pk):   #بتفيد في ال issues
-    member =Member.objects.get(id=pk)
-    orders=member.order_set.all()
-    num_order=orders.count()
-    context={'member': member,'orders':orders}
-    return render(request,'management/profileMember.html',{'member':member})
+@login_required(login_url='login')
+@allowedUsers(allowedGroups=['manager'])
+def managerProfile(request):
+    return render(request,'management/managerProfile.html') 
+
+
+# def customerProfile(request,pk):   #بتفيد في ال issues
+#     member =Member.objects.get(id=pk)
+#     orders=member.order_set.all()
+#     num_order=orders.count()
+#     context={'member': member,'orders':orders}
+#     return render(request,'management/customerProfile.html',{'member':member})
+
 
 # def register(request):
 #     return render(request,'management/register.html') 
 
-def managersList(request):
-    return render(request,'management/managersList.html') 
+def addUser(request):
+    return render(request,'management/addUser.html') 
 
-def membersList(request):
-    member=Member.objects.all()
-    return render(request,'management/membersList.html',{'member':member}) 
 
-# def addUser(request):
-#     return render(request,'management/addUser.html') 
+@login_required(login_url='login')
+@allowedUsers(allowedGroups=['customer'])
+def customerProfile(request):   
+    # customer =Customer.objects.get(id=pk)
+    customer =request.user.customer
+#    orders=member.order_set.all()
+#    num_order=orders.count()
+ #   context={'member': member,'orders':orders}
+    return render(request,'management/customerProfile.html',{'customer':customer})
+
+def profile(request):   
+    group =  request.user.groups.all()[0].name
+    print(group)
+    if group == 'customer':
+       return redirect('customerProfile')
+    if group == 'manager' or group=='admin':
+       return redirect('managerProfile')
