@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect
 from .models import *
-from .forms import IssueForm,CustomerForm
+from .forms import IssueForm,CustomerForm,ManagerForm
 from django.contrib.auth.decorators import  login_required
 from registration.decorators import allowedUsers 
 
@@ -110,12 +110,6 @@ def non_returnedBooks(request):
     return render(request,'management/non_returnedBooks.html') 
 
 
-@login_required(login_url='login')
-@allowedUsers(allowedGroups=['manager'])
-def managerProfile(request):
-    return render(request,'management/managerProfile.html') 
-
-
 # def customerProfile(request,pk):   #بتفيد في ال issues
 #     member =Member.objects.get(id=pk)
 #     orders=member.order_set.all()
@@ -145,6 +139,19 @@ def customerProfile(request):
         if form.is_valid():
             form.save() 
     return render(request,'management/customerProfile.html',{'form':form})
+
+
+
+@login_required(login_url='login')
+@allowedUsers(allowedGroups=['manager'])
+def managerProfile(request):
+    manager =request.user.manager
+    form = ManagerForm(instance=manager)
+    if request.method == 'POST': 
+        form = ManagerForm(request.POST , request.FILES, instance=manager)
+        if form.is_valid():
+            form.save() 
+    return render(request,'management/managerProfile.html',{'form':form}) 
 
 
 

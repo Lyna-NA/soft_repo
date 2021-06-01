@@ -1,6 +1,6 @@
 from django.forms import ModelForm
 
-from .models import Issue,Customer
+from .models import Issue,Customer,Manager
 
 class IssueForm(ModelForm):
     class Meta:
@@ -14,4 +14,12 @@ class CustomerForm(ModelForm):
         model = Customer
         fields ="__all__"
         exclude = ['user' ]
+
+
+class ManagerForm(ModelForm):
+    class Meta:
+        model = Manager
+        fields ="__all__"
+        exclude = ['user' ]
+
 

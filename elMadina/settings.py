@@ -55,6 +55,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+
 ROOT_URLCONF = 'elMadina.urls'
 
 TEMPLATES = [
@@ -81,8 +82,12 @@ WSGI_APPLICATION = 'elMadina.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'softDatabase',
+        'USER':'postgres',
+        'PASSWORD':'lyna_123456',
+        'HOST':'localhost',
+        'PORT':'5432'
     }
 }
 
@@ -132,3 +137,5 @@ STATICFILES_DIRS=[
 ]
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'static/img')
+
+# SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')

@@ -23,6 +23,8 @@ def allowedUsers(allowedGroups=[]):
                     return redirect('customerProfile')
                 if group == 'manager' or 'admin':
                     return redirect('home')
+                else :
+                    return redirect('login')
         return wrapper_func
     return decorator
 
