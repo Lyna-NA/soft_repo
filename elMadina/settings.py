@@ -29,7 +29,7 @@ SECRET_KEY = '(%=8pb5_gzj(jlco^j187)kd^m3o+-xk4j0v-54#pp5$47n0wa'
 DEBUG = True
 
 # ALLOWED_HOSTS = []
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['https://elmadina.herokuapp.com','http://localhost:8000']
 
 # Application definition
 
