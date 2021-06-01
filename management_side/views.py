@@ -1,39 +1,45 @@
 from django.shortcuts import render,redirect
-
-#from django.http import HttpResponse
 from .models import *
-from .forms import IssueForm
+from .forms import IssueForm,CustomerForm,ManagerForm
+from django.contrib.auth.decorators import  login_required
+from registration.decorators import allowedUsers 
 
-# Create your views here.
+@login_required(login_url='login')
+@allowedUsers(allowedGroups=['manager','admin'])
+#@formanagements
 def home(request):
-    members_num=Member.objects.all().count()
+    customers_num=Customer.objects.all().count()
     books_num=Book.objects.all().count()
     nonReturned_books_num=Book.objects.all().filter(status='available').count()
-    context={'members_num':members_num,'books_num':books_num,'nonReturned_books_num':nonReturned_books_num}
-    return render(request,'admin/home.html',context) 
+    context={'customers_num':customers_num,'books_num':books_num,'nonReturned_books_num':nonReturned_books_num}
+    return render(request,'management/home.html',context) 
+
 
 def errorPage(request):
-    return render(request,'admin/404.html') 
+    return render(request,'management/404.html') 
 
 def addBook(request):
-    return render(request,'admin/addBook.html') 
+    return render(request,'management/addBook.html') 
 
 def addCat(request):
-    return render(request,'admin/addCat.html') 
+    return render(request,'management/addCat.html') 
 
-def addShelf(request):
-    return render(request,'admin/addShelf.html') 
+# def addShelf(request):
+#     return render(request,'management/addShelf.html') 
 
 def blank(request):
-    return render(request,'admin/blank.html') 
+    return render(request,'management/blank.html') 
 
 def booksList(request):
     books=Book.objects.all()
-    return render(request,'admin/booksList.html',{'books': books}) 
+    return render(request,'management/booksList.html',{'books': books}) 
 
 def catList(request):
-    return render(request,'admin/catList.html') 
+    return render(request,'management/catList.html') 
 
+
+@login_required(login_url='login')
+@allowedUsers(allowedGroups=['manager'])
 def createIssue(request):
     form=IssueForm()
     if request.method=='POST':
@@ -42,8 +48,11 @@ def createIssue(request):
             form.save()
             return redirect('/')
     context={'form':form}
-    return render(request,'admin/createIssue.html',context) 
+    return render(request,'management/createIssue.html',context) 
 
+
+@login_required(login_url='login')
+@allowedUsers(allowedGroups=['manager'])
 def updateIssue(request,pk):
     issue=Issue.objects.get(id=pk)
     form=IssueForm(instance=issue)
@@ -52,45 +61,104 @@ def updateIssue(request,pk):
         if form.is_valid():
             form.save()
     context={'form':form}
-    return render(request,'admin/createIssue.html',context) 
+    return render(request,'management/createIssue.html',context) 
+
+
+@login_required(login_url='login')
+@allowedUsers(allowedGroups=['manager','admin'])
+def deleteIssue(request,pk):
+    issue=Issue.objects.get(id=pk)
+    if request.method=='POST':
+        issue.delete()
+    context={'issue':issue}
+    return render(request,'management/deleteIssue.html',context) 
+
 
 def forgot_password(request):
-    return render(request,'admin/forgot-password.html') 
+    return render(request,'management/forgot-password.html') 
 
+
+@login_required(login_url='login')
+@allowedUsers(allowedGroups=['manager'])
 def issuesList(request):
     issues=Issue.objects.all()
     context={'issues':issues}
-    return render(request,'admin/issuesList.html',context) 
+    return render(request,'management/issuesList.html',context) 
 
-def login(request):
-    return render(request,'admin/login.html') 
+@allowedUsers(allowedGroups=['manager'])
+def managersList(request):
+    managers=Issue.objects.all()
+    context={'managers':managers}
+    return render(request,'management/managersList.html',context) 
 
+
+@allowedUsers(allowedGroups=['manager','admin'])
+def customersList(request):
+    customer=Issue.objects.all()
+    context={'customer':customer}
+    return render(request,'management/customersList.html',context) 
+
+
+
+# def login(request):
+#     return render(request,'management/login.html') 
+
+
+@login_required(login_url='login')
+@allowedUsers(allowedGroups=['manager'])
 def non_returnedBooks(request):
-    return render(request,'admin/non_returnedBooks.html') 
+    return render(request,'management/non_returnedBooks.html') 
 
-def profileManager(request):
-    return render(request,'admin/profileManager.html') 
 
-def profileMember(request,pk):   #بتفيد في ال issues
-    member =Member.objects.get(id=pk)
+# def customerProfile(request,pk):   #بتفيد في ال issues
+#     member =Member.objects.get(id=pk)
+#     orders=member.order_set.all()
+#     num_order=orders.count()
+#     context={'member': member,'orders':orders}
+#     return render(request,'management/customerProfile.html',{'member':member})
+
+
+# def register(request):
+#     return render(request,'management/register.html') 
+
+def addUser(request):
+    return render(request,'management/addUser.html') 
+
+
+@login_required(login_url='login')
+@allowedUsers(allowedGroups=['customer'])
+def customerProfile(request):   
+    # customer =Customer.objects.get(id=pk)
+    customer =request.user.customer
 #    orders=member.order_set.all()
 #    num_order=orders.count()
  #   context={'member': member,'orders':orders}
-    return render(request,'admin/profileMember.html',{'member':member})
+    form = CustomerForm(instance=customer)
+    if request.method == 'POST': 
+        form = CustomerForm(request.POST , request.FILES, instance=customer)
+        if form.is_valid():
+            form.save() 
+    return render(request,'management/customerProfile.html',{'form':form})
 
-def register(request):
-    return render(request,'admin/register.html') 
 
-def managersList(request):
-    return render(request,'admin/managersList.html') 
 
-def membersList(request):
-    member=Member.objects.all()
-    return render(request,'admin/membersList.html',{'member':member}) 
+@login_required(login_url='login')
+@allowedUsers(allowedGroups=['manager'])
+def managerProfile(request):
+    manager =request.user.manager
+    form = ManagerForm(instance=manager)
+    if request.method == 'POST': 
+        form = ManagerForm(request.POST , request.FILES, instance=manager)
+        if form.is_valid():
+            form.save() 
+    return render(request,'management/managerProfile.html',{'form':form}) 
 
-def addUser(request):
-    return render(request,'admin/addUser.html') 
 
-    # بفيد  في ال issue
-    # بقدر اعمل 
-    # .book.category متلا
+
+def profile(request):   
+    group =  request.user.groups.all()[0].name
+    print(group)
+    if group == 'customer':
+       return redirect('customerProfile')
+    if group == 'manager' or group=='admin':
+       return redirect('managerProfile')
