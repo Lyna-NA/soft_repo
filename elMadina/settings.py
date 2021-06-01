@@ -12,7 +12,6 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 
 from pathlib import Path
 import os
-import django_heroku
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -28,8 +27,7 @@ SECRET_KEY = '(%=8pb5_gzj(jlco^j187)kd^m3o+-xk4j0v-54#pp5$47n0wa'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-# ALLOWED_HOSTS = []
-ALLOWED_HOSTS = ['https://elmadina.herokuapp.com','http://localhost:8000']
+ALLOWED_HOSTS = []
 
 # Application definition
 
@@ -142,4 +140,3 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'static/img')
 
 # SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
-django_heroku.settings(locals())
