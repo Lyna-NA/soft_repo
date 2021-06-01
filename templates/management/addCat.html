@@ -1,0 +1,39 @@
+{%extends 'management/main.html'%}
+{% load static %}
+
+{% block content%}
+
+    <div class="d-flex flex-column" id="content-wrapper">
+        <div id="content">
+            {%include 'management/navbar.html'%}
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12 col-sm-6 col-md-6">
+                        <h3 class="text-dark mb-4">CATEGORIES</h3>
+                    </div>
+                </div>
+                <div class="card" id="TableSorterCard">
+                    <div class="card-header py-3">
+                        <div class="row table-topper align-items-center">
+                            <div class="col-12 col-sm-5 col-md-6 text-start" style="margin: 0px;padding: 5px 15px;">
+                                <p class="text-primary m-0 fw-bold" style="color: rgb(236,143,0) !important;">Add New Category&nbsp;</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <section class="newsletter-subscribe">
+                <div class="container">
+                    <div class="intro"></div>
+                    <form class="d-flex justify-content-center flex-wrap" method="post">
+                        <!--بدي يختار ال   كمانfloor  هنا -->
+                        <div class="mb-3"><input class="form-control" type="text" name="catName" placeholder="Name of Category" style="width: 500px;"></div>
+                        <div class="mb-3"><button class="btn btn-primary" type="submit"style="border-color: rgb(236,143,0)!important;background: rgb(236,143,0)!important;">create category</button></div>
+                    </form>
+                </div>
+            </section>
+        </div>
+        {%include 'management/footer.html'%}
+    </div>
+    <a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
+{% endblock%}

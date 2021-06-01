@@ -1,0 +1,56 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>ELMadina Library</title>
+    <link rel="stylesheet" href="{% static 'registration/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href=" https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Slab:300,400|Roboto:300,400,700">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Slab:300,400|Roboto:300,400,700">
+    <link rel="stylesheet" href="{% static 'registration/fonts/fontawesome-all.min.css' %}">
+    <link rel="stylesheet" href="{% static 'registration/fonts/font-awesome.min.css' %}">
+    <link rel="stylesheet" href="{% static 'registration/fonts/ionicons.min.css' %}">
+    <link rel="stylesheet" href="{% static 'registration/fonts/fontawesome5-overrides.min.cs' %}s">
+    <link rel="stylesheet" href="{% static 'registration/css/Footer-Dark.css' %}">
+    <link rel="stylesheet" href="{% static 'registration/css/gradient-navbar-1.css' %}">
+    <link rel="stylesheet" href="{% static 'registration/css/gradient-navbar.css' %}">
+    <link rel="stylesheet" href="{% static 'registration/css/Login-Form-Dark.css' %}">
+    <link rel="stylesheet" href="{% static 'registration/css/Navbar---Apple-1.css' %}">
+    <link rel="stylesheet" href="{% static 'registration/css/Navbar---Apple.css' %}">
+    <link rel="stylesheet" href="{% static 'registration/css/Navigation-with-Button.css' %}">
+    <link rel="stylesheet" href="{% static 'registration/css/Registration-Form-with-Photo.css' %}">
+    <link rel="stylesheet" href="{% static 'registration/css/Sleek-Registration-Section.css' %}">
+    <link rel="stylesheet" href="{% static 'registration/css/sticky-dark-top-nav-with-dropdown.css' %}">
+    <link rel="stylesheet" href="{% static 'registration/css/visionae-reset-password-1.css' %}">
+    <link rel="stylesheet" href="{% static 'registration/css/visionae-reset-password.css' %}">
+
+    
+</head>
+
+<body >
+
+    {% include 'registration/partials/_navbar.html'%}
+
+
+    {% block content %}
+
+    {% endblock %}
+
+
+    {% include 'registration/partials/_footer.html'%}
+   
+    <script src="{% static 'registration/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'registration/js/chart.min.js' %}"></script>
+    <script src="{% static 'registration/js/bs-init.js' %}"></script>
+    <script src="{% static 'registration/js/Navbar---Apple.js' %}"></script>
+    <script src="{% static 'registration/js/theme.js' %}"></script>
+    
+</body>
+
+</html>
