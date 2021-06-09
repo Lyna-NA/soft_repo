@@ -4,15 +4,27 @@ from .forms import IssueForm,CustomerForm,ManagerForm
 from django.contrib.auth.decorators import  login_required
 from registration.decorators import allowedUsers 
 
-@login_required(login_url='login')
-@allowedUsers(allowedGroups=['manager','admin'])
+
+def home(request):   
+    if request.user.groups.exists():
+        group =  request.user.groups.all()[0].name
+        print(group)
+        if group == 'customer':
+            return redirect('user_dashboard')
+        if group == 'manager' or group=='admin':
+            return redirect('manager_dashboard')
+    return redirect('signin')
+
+
 #@formanagements
-def home(request):
+@login_required(login_url='signin')
+@allowedUsers(allowedGroups=['manager'])
+def manager_dashboard(request):
     customers_num=Customer.objects.all().count()
     books_num=Book.objects.all().count()
     nonReturned_books_num=Book.objects.all().filter(status='available').count()
     context={'customers_num':customers_num,'books_num':books_num,'nonReturned_books_num':nonReturned_books_num}
-    return render(request,'management/home.html',context) 
+    return render(request,'management/manager_dashboard.html',context) 
 
 
 def errorPage(request):
@@ -38,36 +50,40 @@ def catList(request):
     return render(request,'management/catList.html') 
 
 
-@login_required(login_url='login')
+@login_required(login_url='signin')
 @allowedUsers(allowedGroups=['manager'])
 def createIssue(request):
     form=IssueForm()
     if request.method=='POST':
         form=IssueForm(request.POST)
+        form.manager=request.user.id
         if form.is_valid():
             form.save()
-            return redirect('/')
+            return redirect('issuesList')
     context={'form':form}
     return render(request,'management/createIssue.html',context) 
 
 
-@login_required(login_url='login')
+@login_required(login_url='signin')
 @allowedUsers(allowedGroups=['manager'])
 def updateIssue(request,pk):
-    issue=Issue.objects.get(id=pk)
-    form=IssueForm(instance=issue)
+    issue=Issue.objects.get(issue_id=pk)
+    #book_status=Issue.objects.get(book_id=issue.issue_id)
+    form=IssueForm(instance=issue)      
+    form.manager=request.user.id
+    
     if request.method=='POST':
         form=IssueForm(request.POST,instance=issue)
         if form.is_valid():
             form.save()
     context={'form':form}
-    return render(request,'management/createIssue.html',context) 
+    return render(request,'management/updateIssue.html',context) 
 
 
-@login_required(login_url='login')
+@login_required(login_url='signin')
 @allowedUsers(allowedGroups=['manager','admin'])
 def deleteIssue(request,pk):
-    issue=Issue.objects.get(id=pk)
+    issue=Issue.objects.get(issue_id=pk)
     if request.method=='POST':
         issue.delete()
     context={'issue':issue}
@@ -78,7 +94,7 @@ def forgot_password(request):
     return render(request,'management/forgot-password.html') 
 
 
-@login_required(login_url='login')
+@login_required(login_url='signin')
 @allowedUsers(allowedGroups=['manager'])
 def issuesList(request):
     issues=Issue.objects.all()
@@ -99,12 +115,7 @@ def customersList(request):
     return render(request,'management/customersList.html',context) 
 
 
-
-# def login(request):
-#     return render(request,'management/login.html') 
-
-
-@login_required(login_url='login')
+@login_required(login_url='signin')
 @allowedUsers(allowedGroups=['manager'])
 def non_returnedBooks(request):
     return render(request,'management/non_returnedBooks.html') 
@@ -125,24 +136,20 @@ def addUser(request):
     return render(request,'management/addUser.html') 
 
 
-@login_required(login_url='login')
+@login_required(login_url='signin')
 @allowedUsers(allowedGroups=['customer'])
 def customerProfile(request):   
-    # customer =Customer.objects.get(id=pk)
     customer =request.user.customer
-#    orders=member.order_set.all()
-#    num_order=orders.count()
- #   context={'member': member,'orders':orders}
     form = CustomerForm(instance=customer)
     if request.method == 'POST': 
         form = CustomerForm(request.POST , request.FILES, instance=customer)
         if form.is_valid():
             form.save() 
-    return render(request,'management/customerProfile.html',{'form':form})
+    return render(request,'userSide/customerProfile.html',{'form':form})
 
 
 
-@login_required(login_url='login')
+@login_required(login_url='signin')
 @allowedUsers(allowedGroups=['manager'])
 def managerProfile(request):
     manager =request.user.manager

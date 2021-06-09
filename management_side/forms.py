@@ -1,12 +1,18 @@
 from django.forms import ModelForm
 
-from .models import Issue,Customer,Manager
+from .models import *
 
 class IssueForm(ModelForm):
     class Meta:
         model = Issue
         fields="__all__"
+        exclude = ['manager' ]
 
+
+# class Book_status_condition_form(ModelForm):
+#     class Meta:
+#         model = Book
+#         fields="status","condition"
 
 
 class CustomerForm(ModelForm):

@@ -1,11 +1,10 @@
-{%extends 'management/main.html'%}
+{%extends 'userSide/base2.html'%}
 {% load static %}
 
 {% block content%}
 
     <div class="d-flex flex-column" id="content-wrapper">
         <div id="content">
-            {%include 'management/navbar.html'%}
             <div class="container-fluid">
                 <h3 class="text-dark mb-4">Profile</h3>
                 <form method="POST" action="" enctype="multipart/form-data">
@@ -15,7 +14,7 @@
                                 <div class="card mb-3">
                                     {% if request.user.customer.image.url != null%}
                                     <div class="card-body text-center shadow">
-                                        <a href="{{form.image.value.url}}"><img class="rounded-circle mb-3 mt-4" src="{{request.user.customer.image.url}}" width="160" height="160"></a></div>
+                                        <a href="{{form.photo.value.url}}"><img class="rounded-circle mb-3 mt-4" src="{{request.user.customer.photo.url}}" width="160" height="160"></a></div>
                                     {% else %}
                                     <div class="card-body text-center shadow">
                                         <a href="{%static 'img/dogs/image2.jpeg'%}"><img class="rounded-circle mb-3 mt-4" src="{%static 'img/dogs/image2.jpeg'%}"  width="160" height="160"></a>
@@ -75,13 +74,31 @@
                                     <div class="card-body">
                                         <div class="row">
                                         </div>
-                                        <div class="form-group mb-3"><label class="form-label" for="address"><strong>Address</strong></label><input class="form-control" type="text" id="address" placeholder="Sunset Blvd, 38" name="address" value="{{form.address.value}}"></div>
+                                        <div class="form-group mb-3"><label class="form-label" for="address"><strong>Address</strong></label>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col">
+                                                <div class="form-group mb-1"><input class="form-control" type="text" id="address" placeholder="state" name="state" value="{{form.state.value}}"></div>
+                                            </div>
+                                            <div class="col">
+                                                <div class="form-group mb-1"><input class="form-control" type="text" id="address" placeholder="street" name="street" value="{{form.street.value}}"></div>
+                                            </div>
+                                            <div class="col">
+                                                <div class="form-group mb-1"><input class="form-control" type="text" id="address" placeholder="building_num" name="building_num" value="{{form.building_num.value}}"></div>
+                                            </div>
+                                            <div class="col">
+                                                <div class="form-group mb-1"><input class="form-control" type="text" id="address" placeholder="dept_num" name="dept_num" value="{{form.dept_num.value}}"></div>
+                                            </div>
+                                        </div>
                                         <div class="row">
                                             <div class="col">
                                                 <div class="form-group mb-3"><label class="form-label" for="city"><strong>City</strong></label><input class="form-control" type="text" id="city" placeholder="Los Angeles" name="city" value="{{form.city.value}}"></div>
                                             </div>
                                             <div class="col">
                                                 <div class="form-group mb-3"><label class="form-label" for="country"><strong>Country</strong></label><input class="form-control" type="text" id="country" placeholder="USA" name="country" value="{{form.country.value}}"></div>
+                                            </div>
+                                            <div class="col">
+
                                             </div>
                                         </div>
                                         <div class="form-group mb-3"><button class="btn btn-primary btn-sm" type="submit" style="border-color: #ec8f00;background: #ec8f00;">Save&nbsp;Settings</button></div>
@@ -92,7 +109,11 @@
                 </form>
             </div>
         </div>
-        {%include 'management/footer.html'%}
+        <footer class="bg-white sticky-footer">
+            <div class="container my-auto">
+                <div class="text-center my-auto copyright"><span>Copyright © Brand 2021</span></div>
+            </div>
+        </footer>
     </div>
     <a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
 {% endblock%}

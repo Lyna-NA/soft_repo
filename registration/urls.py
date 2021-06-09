@@ -3,7 +3,9 @@ from . import views
 
 urlpatterns = [
     # auth app 
-    path('register/' ,views.register, name="register"),
-    path('login/' ,views.loginView, name="login"),
+    path('signup/' ,views.signup, name="signup"),
+    path('signin/' ,views.signin, name="signin"),
     path('logout/' ,views.userLogout, name="logout"),
+    path('setInfo/' ,views.setInfo, name="setInfo"),
+
 ]

@@ -3,6 +3,7 @@ from django.shortcuts import redirect
 
 def notLoggedUsers(view_func):
     def wrapper_func(request , *args,**kwargs):
+        print(request.user.is_authenticated)
         if request.user.is_authenticated:
             return redirect('home')
         else:
@@ -19,12 +20,7 @@ def allowedUsers(allowedGroups=[]):
             if group in allowedGroups:
                return view_func(request , *args,**kwargs)
             else:
-                if group == 'customer':
-                    return redirect('customerProfile')
-                if group == 'manager' or 'admin':
-                    return redirect('home')
-                else :
-                    return redirect('login')
+               return redirect('home')
         return wrapper_func
     return decorator
 

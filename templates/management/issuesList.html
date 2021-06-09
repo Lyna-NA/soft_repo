@@ -52,12 +52,15 @@
                                             <tbody>
                                                 {%for item in issues%}
                                                 <tr>
-                                                    <td>{{item.member}}</td>
-                                                    <td>{{item.book}}</td>
-                                                    <td>{{item.tag}}</td>
-                                                    <td>{{item.status}}</td>
-                                                    <td>{{item.date_created}}</td>
-                                                    <td class="text-center"><a href= {% url 'updateIssue' item.id %} class="btn btn-success" role="button" style="background: #002907;margin: 2px;"><i class="fas fa-pencil-alt"></i></a><a class="btn btn-danger" href= {% url 'deleteIssue' item.id %} role="button" style="margin: 2px;background: #810000;"><i class="fas fa-trash"></i></a></td>
+                                                    <td>{{item.issue_id}}</td>
+                                                    <td>{{item.book_id}}</td>
+                                                    <td>{{item.book_id.title}}</td>
+                                                    <td>{{item.manager.username}}</td>
+                                                    <td>{{item.book_id.status}}</td>
+                                                    <td>{{item.book_id.condition}}</td>
+                                                    <td>{{item.customer}}</td>
+                                                    <td>{{item.customer.username}}</td>
+                                                    <td class="text-center"><a href= {% url 'updateIssue' item.issue_id %} class="btn btn-success" role="button" style="background: #002907;margin: 2px;"><i class="fas fa-pencil-alt"></i></a><a class="btn btn-danger" href= {% url 'deleteIssue' item.issue_id %} role="button" style="margin: 2px;background: #810000;"><i class="fas fa-trash"></i></a></td>
                                                 </tr>
                                                 {% endfor%}
                                             </tbody>

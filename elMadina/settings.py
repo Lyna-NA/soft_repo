@@ -84,7 +84,7 @@ WSGI_APPLICATION = 'elMadina.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'softDatabase',
+        'NAME': 'SE_DB',
         'USER':'postgres',
         'PASSWORD':'lyna_123456',
         'HOST':'localhost',
@@ -140,4 +140,3 @@ STATICFILES_DIRS=[
 MEDIA_ROOT = os.path.join(BASE_DIR, 'static/img')
 
 # SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-
