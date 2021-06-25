@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 
 from pathlib import Path
 import os
-
+import dj_database_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -82,16 +82,17 @@ WSGI_APPLICATION = 'elMadina.wsgi.application'
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'SE_DB',
-        'USER':'postgres',
-        'PASSWORD':'lyna_123456',
-        'HOST':'localhost',
-        'PORT':'5432'
-    }
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.postgresql',
+    #     'NAME': 'SE_DB',
+    #     'USER':'postgres',
+    #     'PASSWORD':'lyna_123456',
+    #     'HOST':'localhost',
+    #     'PORT':'5432'
+    # }
 }
 
+DATABASES['default'] =dj_database_url.parse('postgres://xkupofox:8Rb3Si7zRUEfJ3aT3aupDBuc15BBqPjw@batyr.db.elephantsql.com/xkupofox')
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators

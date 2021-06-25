@@ -4,7 +4,6 @@ from jsonfield import JSONField
 
 # Create your models here.
 
-
 class member(models.Model):
     user = models.OneToOneField(User,null=True, on_delete=models.CASCADE)
     photo=models.ImageField(blank=True,upload_to='usersImages/%Y/%m/%d/', null=True,default="person.png")
@@ -30,6 +29,13 @@ class member(models.Model):
 class Customer(member):
     def __str__(self):
         return self.username
+
+    # @classmethod
+    # def create(cls,user,username,first_name,gender,last_name,country,state,city,street,building_num,dept_num,phones):
+    #     customer =cls(user=user,username=username,first_name=first_name,last_name=last_name
+    #                             ,gender=gender,country=country,state=state,city=city,street=street,building_num=building_num,
+    #                             dept_num=dept_num,phones=phones)
+    #     return customer
 
 
 class Floor(models.Model):
@@ -115,7 +121,7 @@ class Book(models.Model):
        
 
 class Issue(models.Model):
-    issue_id=models.CharField(primary_key=True,max_length=50,default="")
+    issue_id=models.AutoField(primary_key=True,default=4)
     book_id = models.ForeignKey(Book, on_delete=models.CASCADE)
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE,default="")
     manager = models.ForeignKey(Manager,null=True, on_delete=models.SET_NULL)
@@ -124,7 +130,7 @@ class Issue(models.Model):
     last_edit= models.DateField(auto_now=True, auto_now_add=False,null=True)
 
     def __str__(self):
-            return self.issue_id
+       return str(self.issue_id)
 
 
 # class Condition(models.Model):

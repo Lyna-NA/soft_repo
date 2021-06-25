@@ -7,6 +7,7 @@ from django.contrib.auth import login,logout,authenticate
 from .decorators import notLoggedUsers , allowedUsers#, formanagements
 from django.contrib.auth.models import Group
 from validate_email import validate_email 
+from management_side.models import *
 
 # @notLoggedUsers
 # def register(request):   
@@ -162,6 +163,7 @@ def setInfo(request):
         'has_error':False
         }
         username = request.POST.get('username')
+        email= request.user.email
         first_name = request.POST.get('first_name')
         last_name = request.POST.get('last_name')
         gender =request.POST.get('gender')
@@ -171,21 +173,36 @@ def setInfo(request):
         street =request.POST.get('street')
         building_num =request.POST.get('building_num')
         dept_num =request.POST.get('dept_num')
+        phones =request.POST.get('phones')
         
+        # user =get_object_or_404(User,username=username)
+        # user.first_name=first_name
+        # user.last_name=last_name
+        # user.gender=gender
+        # user.country=country
+        # user.city=city
+        # user.state=state
+        # user.street=street
+        # user.building_num= building_num
+        # user.dept_num=dept_num
         
-        user =get_object_or_404(User,username=username)
-        user.first_name=first_name
-        user.last_name=last_name
-        user.gender=gender
-        user.country=country
-        user.city=city
-        user.state=state
-        user.street=street
-        user.building_num= building_num
-        user.dept_num=dept_num
-        
-        user.save()
-        
+        # user.save()
+        customer= Customer.objects.create()
+        customer.username=username
+        customer.user=request.user
+        customer.email=email
+        customer.first_name=first_name
+        customer.last_name=last_name
+        customer.gender=gender
+        customer.country=country
+        customer.city=city
+        customer.state=state
+        customer.street=street
+        customer.building_num= building_num
+        customer.dept_num=dept_num
+        customer.phones=phones
+        customer.save()
+        print(customer.username,customer.user,customer.gender)
         messages.add_message(request,messages.SUCCESS,'Added successfully')
         
 

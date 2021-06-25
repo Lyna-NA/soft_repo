@@ -18,7 +18,7 @@ def home(request):
 
 #@formanagements
 @login_required(login_url='signin')
-@allowedUsers(allowedGroups=['manager'])
+#@allowedUsers(allowedGroups=['manager','admin'])
 def manager_dashboard(request):
     customers_num=Customer.objects.all().count()
     books_num=Book.objects.all().count()
@@ -81,7 +81,7 @@ def updateIssue(request,pk):
 
 
 @login_required(login_url='signin')
-@allowedUsers(allowedGroups=['manager','admin'])
+@allowedUsers(allowedGroups=['manager'])
 def deleteIssue(request,pk):
     issue=Issue.objects.get(issue_id=pk)
     if request.method=='POST':
@@ -95,13 +95,13 @@ def forgot_password(request):
 
 
 @login_required(login_url='signin')
-@allowedUsers(allowedGroups=['manager'])
+@allowedUsers(allowedGroups=['manager','admin'])
 def issuesList(request):
     issues=Issue.objects.all()
     context={'issues':issues}
     return render(request,'management/issuesList.html',context) 
 
-@allowedUsers(allowedGroups=['manager'])
+@allowedUsers(allowedGroups=['manager','admin'])
 def managersList(request):
     managers=Issue.objects.all()
     context={'managers':managers}
