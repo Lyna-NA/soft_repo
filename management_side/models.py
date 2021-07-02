@@ -115,7 +115,7 @@ class Book(models.Model):
     
     status =models.CharField(max_length=30,choices=STATUS,default="")
     def __str__(self):
-        return str(self.id)
+        return self.title
 
     def delete(self, *args, **kwargs):
         super().delete(*args, **kwargs)     
