@@ -43,7 +43,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'management_side',
     'user_side',
-    'registration'
+    'registration',
+    'isbn_field'
 ]
 
 MIDDLEWARE = [
@@ -82,17 +83,18 @@ WSGI_APPLICATION = 'elMadina.wsgi.application'
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
 DATABASES = {
-    # 'default': {
-    #     'ENGINE': 'django.db.backends.postgresql',
-    #     'NAME': 'SE_DB',
-    #     'USER':'postgres',
-    #     'PASSWORD':'lyna_123456',
-    #     'HOST':'localhost',
-    #     'PORT':'5432'
-    # }
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'SE_DB',
+        'USER':'postgres',
+        'PASSWORD':'lyna_123456',
+        'HOST':'localhost',
+        'PORT':'5432'
+    }
 }
 
-DATABASES['default'] =dj_database_url.parse('postgres://xkupofox:8Rb3Si7zRUEfJ3aT3aupDBuc15BBqPjw@batyr.db.elephantsql.com/xkupofox')
+#DATABASES['default'] =dj_database_url.parse('postgres://xkupofox:8Rb3Si7zRUEfJ3aT3aupDBuc15BBqPjw@batyr.db.elephantsql.com/xkupofox')
+
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators

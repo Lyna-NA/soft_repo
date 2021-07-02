@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from jsonfield import JSONField
+from isbn_field import ISBNField
 
 # Create your models here.
 
@@ -63,10 +64,10 @@ class Manager(member):
 class Category(models.Model):
     floor_id =models.ForeignKey(Floor,on_delete=models.CASCADE)
     cat_id = models.AutoField(primary_key=True)
-    cat_name =models.CharField(max_length=10,default="")
+    cat_name =models.CharField(max_length=50,default="")
 
     def __str__(self):
-        return str(self.cat_id) 
+        return self.cat_name
 
 
 class Shelf(models.Model):
@@ -78,14 +79,16 @@ class Shelf(models.Model):
 
 
 class BookPosition(models.Model):
-    floor_id =models.ManyToManyField(Floor)
-    shelf_id =models.ManyToManyField(Shelf)
-    cat_id = models.ManyToManyField(Category)
+    floor_id =models.ForeignKey(Floor,on_delete=models.CASCADE)
+    cat_id = models.ForeignKey(Category,on_delete=models.CASCADE)
+    shelf_id =models.ForeignKey(Shelf,on_delete=models.CASCADE)
+
+    class Meta:
+        unique_together = (("floor_id", "shelf_id","cat_id"),)
 
 
 class Book(models.Model):
-    book_id = models.AutoField(primary_key=True)
-    isbn =models.IntegerField()
+    isbn =ISBNField()
     book_seat =models.ForeignKey(BookPosition,on_delete=models.CASCADE,default="")
     title =models.CharField(max_length=40,default="")
     language =models.CharField(max_length=30,default="")
@@ -93,7 +96,7 @@ class Book(models.Model):
     description =models.TextField(max_length=400,default="")
     demurage =models.IntegerField(default=0)
     author_name =models.CharField(default="",max_length=30)
-    version_number =models.CharField(max_length=10,default="")
+    version_number =models.IntegerField(default=1)
     year =models.DateField(max_length=10,default="")
 
     CONDITION =(
@@ -107,10 +110,12 @@ class Book(models.Model):
         ('pending','pending'),
         ('delivered','delivered'),
         ('out of date','out of date'),
+        ('available','available')
     )
+    
     status =models.CharField(max_length=30,choices=STATUS,default="")
     def __str__(self):
-        return str(self.book_id)
+        return str(self.id)
 
     def delete(self, *args, **kwargs):
         super().delete(*args, **kwargs)     
@@ -122,7 +127,7 @@ class Book(models.Model):
 
 class Issue(models.Model):
     issue_id=models.AutoField(primary_key=True,default=4)
-    book_id = models.ForeignKey(Book, on_delete=models.CASCADE)
+    id = models.ForeignKey(Book, on_delete=models.CASCADE)
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE,default="")
     manager = models.ForeignKey(Manager,null=True, on_delete=models.SET_NULL)
     issue_date = models.DateField(auto_now=False, auto_now_add=True,null=True)
