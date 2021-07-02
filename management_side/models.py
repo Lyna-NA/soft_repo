@@ -126,7 +126,7 @@ class Book(models.Model):
        
 
 class Issue(models.Model):
-    issue_id=models.AutoField(primary_key=True,default=4)
+    issue_id=models.AutoField(primary_key=True)
     id = models.ForeignKey(Book, on_delete=models.CASCADE)
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE,default="")
     manager = models.ForeignKey(Manager,null=True, on_delete=models.SET_NULL)

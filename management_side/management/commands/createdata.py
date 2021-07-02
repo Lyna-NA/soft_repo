@@ -6,7 +6,6 @@ from random import randint
 import random
 
 
-
 FLOOR =[
     "1st",
     "2nd",
