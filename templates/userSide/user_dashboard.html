@@ -1,0 +1,62 @@
+{% extends 'userSide/base2.html'%}
+{% load static %}
+{% block content%}
+
+
+<div class="container-fluid">
+    <div class="d-sm-flex justify-content-between align-items-center mb-4">
+        <h3 class="text-dark mb-0">Dashboard</h3>
+    </div>
+    <div class="row">
+        <div class="col col-lg-3 col-sm-12">
+            <div class="card-box bg-blue" style="background: rgb(236,143,0);">
+                <div class="inner">
+                    <h3 style="color: #ffffff;"><strong>{{ booksNum }}</strong></h3>
+                    <p> Books</p>
+                </div>
+                <div class="icon"><i class="fa fa-book"></i></div><a class="card-box-footer" href="">View
+                    More&nbsp;&nbsp;<i class="fa fa-star fa fa-arrow-circle-right"></i></a>
+            </div>
+        </div>
+        <div class="col col-lg-3 col-sm-12">
+            <div class="card-box bg-blue" style="background: #F2AE30;">
+                <div class="inner">
+                    <h3 style="color: #ffffff;"><strong>2</strong></h3>
+                    <p>Issued Book</p>
+                </div>
+                <div class="icon"><i class="far fa-file-alt"></i></div><a class="card-box-footer" href="#">View
+                    More&nbsp;&nbsp;<i class="fa fa-star fa fa-arrow-circle-right"></i></a>
+            </div>
+        </div>
+        <div class="col col-lg-3 col-sm-12">
+            <div class="card-box bg-blue">
+                <div class="inner">
+                    <h3 style="color: #ffffff;"><strong>{{ ss }}</strong></h3>
+                    <p> Issued Books</p>
+                </div>
+                <div class="icon"><i class="fa fa-star"></i></div><a class="card-box-footer" href="#">View
+                    More&nbsp;&nbsp;<i class="fa fa-star fa fa-arrow-circle-right"></i></a>
+            </div>
+        </div>
+        <div class="col col-lg-3 col-sm-12">
+            <div class="card-box bg-blue">
+                <div class="inner">
+                    <h3 style="color: #ffffff;"><strong>1</strong></h3>
+                    <p> Return books</p>
+                </div>
+                <div class="icon"><i class="fa fa-star"></i></div><a class="card-box-footer" href="#">View
+                    More&nbsp;&nbsp;<i class="fa fa-star fa fa-arrow-circle-right"></i></a>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+<footer class="bg-white sticky-footer">
+    <div class="container my-auto">
+        <div class="text-center my-auto copyright"><span>Copyright © Brand 2021</span></div>
+    </div>
+</footer>
+
+{% endblock %}

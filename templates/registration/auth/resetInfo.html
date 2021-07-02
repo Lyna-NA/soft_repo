@@ -1,0 +1,123 @@
+{% extends 'userSide/base2.html'%}
+{% load static %}
+{% block content%}
+
+{% if messages %}
+
+{% for message in messages %}
+<div class="alert alert-success"> {{message}} </div>
+{% endfor %}
+
+{% endif %}
+<form method="post">
+    {% csrf_token %}
+
+    <div class="container-fluid">
+     <h3 class="text-dark mb-4" style="text-align: center;color: rgb(133,135,150)!important;">Welcome at Madina
+                Library , Please complete your profile setting</h3>
+    
+    <div class="row mb-3">
+                <div class="col-lg-4">
+                    <div class="card mb-3">
+                        <div class="card-body text-center shadow"><img class="rounded-circle mb-3 mt-4"
+                                src="{% static 'img/person.png' %}" width="160" height="160">
+                            <div class="mb-3"><button class="btn btn-primary btn-sm" type="button"
+                                    style="background: #F2AE30;border-color: #F2AE30;">Add photo</button></div>
+                        </div>
+                    </div>
+                    <div class="card shadow mb-4"></div>
+                </div>
+    
+                <div class="col-lg-8">
+                 <div class="row">
+                        <div class="col">
+                            <div class="card shadow mb-3">
+                                <div class="card-header py-3">
+                                    <p class="m-0 fw-bold" style="border-color: rgb(59,12,6);color: #F2AE30;">User Settings
+                                    </p>
+                                </div>
+                                <div class="card-body">
+                                    <form>
+                                        <div class="row">
+                                            <div class="col">
+                                                <div class="mb-3"><label class="form-label" for="first_name"><strong>User
+                                                            Name</strong></label><input class="form-control" type="text"
+                                                        id="username" name="username" value="{{ user.username }}"></div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col">
+                                                <div class="mb-3"><label class="form-label" for="first_name"><strong>First
+                                                            Name</strong></label><input class="form-control" type="text"
+                                                        id="first_name" name="first_name"></div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col">
+                                                <div class="mb-3"><label class="form-label" for="first_name"><strong>Last
+                                                            Name</strong><br></label><input class="form-control" type="text"
+                                                        id="last_name" name="last_name"></div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col">
+                                                <div class="mb-3"></div>
+                                                
+                                                    <div class="form-group">
+                                                        <label>Gender</label>
+                                                        <select name="gender" class="form-control">
+                                                            <option>Female</option>
+                                                            <option>Male</option>
+                                                        </select>
+                                                    </div>
+                                                
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+    
+    
+                            <div class="card shadow">
+                                <div class="card-header py-3">
+                                    <p class="text-primary m-0 fw-bold"
+                                        style="color: #F2AE30!important;border-color: #F2AE30;">Contact information</p>
+                                </div>
+                                <div class="card-body">
+                                    
+                                        <div class="mb-3"><label class="form-label"
+                                                for="address"><strong>Country&nbsp;</strong></label><input
+                                                class="form-control" type="text" id="country" name="country"></div>
+                                        <div class="mb-3"><label class="form-label"
+                                                for="address"><strong>State</strong></label><input class="form-control"
+                                                type="text" id="state" name="state"></div>
+                                        <div class="mb-3"><label class="form-label"
+                                                for="address"><strong>City</strong><br></label><input class="form-control"
+                                                type="text" id="city" name="city"></div>
+                                        <div class="mb-3"><label class="form-label"
+                                                for="address"><strong>Street</strong></label><input class="form-control"
+                                                type="text" id="street" name="street"></div>
+                                        <div class="mb-3"><label class="form-label" for="address"><strong>Building
+                                                    number</strong></label><input class="form-control" type="text"
+                                                id="building_num" name="building_num"></div>
+                                        <div class="mb-3"><label class="form-label" for="address"><strong>Department
+                                                    number&nbsp;</strong></label><input class="form-control" type="text"
+                                                id="dept_num" name="dept_num"></div>
+                                        <div class="mb-3"><label class="form-label" for="address"><strong>Phone
+                                                    number&nbsp;</strong></label><input class="form-control" type="text"
+                                                id="phones" name="phones"></div>
+                                    
+                                </div>
+                            </div>
+    <button class="btn btn-primary btn-sm" type="submit" name="submit"
+                                style="background: #F2AE30;border-color: #F2AE30;text-align: right;">Save</button>
+                            <div class="card shadow" style="margin-top: 16px;"></div>                    </div>
+                  </div>
+    
+                </div>
+    </div>
+    
+    </div>
+    
+    </form>
+    {% endblock %}

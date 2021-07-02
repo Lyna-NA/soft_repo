@@ -1,0 +1,121 @@
+{%extends 'management/main.html'%}
+{% load static %}
+
+{% block content%}
+
+    <div class="d-flex flex-column" id="content-wrapper">
+        <div id="content">
+            {%include 'management/navbar.html'%}
+            <div class="container-fluid">
+                <h3 class="text-dark mb-4">Profile</h3>
+                <form method="POST" action="" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="row mb-3">
+                            <div class="col-lg-4">
+                                <div class="card mb-3">
+                                    {% if request.user.manager.image.url != null%}
+                                    <div class="card-body text-center shadow">
+                                        <a href="{{form.image.value.url}}"><img class="rounded-circle mb-3 mt-4" src="{{request.user.manager.image.url}}" width="160" height="160"></a></div>
+                                    {% else %}
+                                    <div class="card-body text-center shadow">
+                                        <a href="{%static 'img/dogs/image2.jpeg'%}"><img class="rounded-circle mb-3 mt-4" src="{%static 'img/dogs/image2.jpeg'%}"  width="160" height="160"></a>
+                                    </div>
+                                    {%endif%}
+                                    <p>
+                                        <input type="checkbox" name="image-clear" id="image-clear_id">
+                                        <label for="image-clear_id">Clear</label><br>
+                                        <input type="file" name="image" accept="image/*">
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="col-lg-8">
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="card shadow mb-3">
+                                            <div class="card-header py-3">
+                                                <p class="text-primary m-0 fw-bold" style="color: #ec8f00 !important;">User Settings</p>
+                                            </div>
+                                            <div class="card-body">
+                                                    {% if form.errors %}
+                                                    <div class="row alert alert-danger" >
+                                                        {{form.errors}} 
+                                                    </div>
+                                                    {%endif%}
+                                                    <div class="row">
+                                                        <div class="col">
+                                                            <div class="form-group mb-3"><label class="form-label" for="username"><strong>Username</strong></label><input class="form-control" type="text" id="username" placeholder="username" name="username" value="{{form.username.value}}"></div>
+                                                        </div>
+                                                        <div class="col">
+                                                            <div class="form-group mb-3"><label class="form-label" for="email"><strong>Email Address</strong></label><input class="form-control" type="email" id="email" placeholder="user@example.com" name="email" value="{{form.email.value}}"></div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col">
+                                                            <div class="form-group mb-3"><label class="form-label" for="first_name"><strong>First Name</strong></label><input class="form-control" type="text" id="first_name" placeholder="John" name="first_name" value="{{form.first_name.value}}"></div>
+                                                        </div>
+                                                        <div class="col">
+                                                            <div class="form-group mb-3"><label class="form-label" for="last_name"><strong>Last Name</strong></label><input class="form-control" type="text" id="last_name" placeholder="Doe" name="last_name" value="{{form.last_name.value}}"></div>
+                                                        </div>
+                                                        <div class="col">
+                                                            <div class="form-group mb-3"><label class="form-label" for="gender"><strong>Gender</strong></label><input class="form-control" type="text" id="gender" placeholder="Female/Male" name="gender" value="{{form.gender.value}}"></div>
+                                                        </div>
+                                                        <div class="col">
+                                                            <div class="form-group mb-3"><label class="form-label" for="working_floor"><strong>Working Floor</strong></label><input class="form-control" type="text" id="working_floor" placeholder="working floor" name="working_floor" value="{{form.working_floor.value}}"></div>
+                                                        </div>
+                                                    </div> 
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <div class="card shadow">
+                                    <div class="card-header py-3">
+                                        <p class="text-primary m-0 fw-bold" style="color: #ec8f00 !important;">Contact Settings</p>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="row">
+                                        </div>
+                                        <div class="form-group mb-3"><label class="form-label" for="address"><strong>Address</strong></label></div>
+                                        <div class="row">
+                                            <div class="col">
+                                                <div class="form-group mb-1"><input class="form-control" type="text" id="state" placeholder="state" name="state" value="{{form.state.value}}"></div>
+                                            </div>
+                                            <div class="col">
+                                                <div class="form-group mb-1"><input class="form-control" type="text" id="street" placeholder="street" name="street" value="{{form.street.value}}"></div>
+                                            </div>
+                                            <div class="col">
+                                                <div class="form-group mb-1"><input class="form-control" type="text" id="building_num" placeholder="building_num" name="building_num" value="{{form.building_num.value}}"></div>
+                                            </div>
+                                            <div class="col">
+                                                <div class="form-group mb-1"><input class="form-control" type="text" id="dept_num" placeholder="dept_num" name="dept_num" value="{{form.dept_num.value}}"></div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col">
+                                                <div class="form-group mb-3"><label class="form-label" for="city"><strong>City</strong></label><input class="form-control" type="text" id="city" placeholder="Los Angeles" name="city" value="{{form.city.value}}"></div>
+                                            </div>
+                                            <div class="col">
+                                                <div class="form-group mb-3"><label class="form-label" for="country"><strong>Country</strong></label><input class="form-control" type="text" id="country" placeholder="USA" name="country" value="{{form.country.value}}"></div>
+                                            </div>
+                                            
+                                        </div>
+                                        <div class="row">
+                                            <div class="col">
+                                                <div class="form-group mb-3"><label class="form-label" for="country"><strong>Phones</strong></label><input class="form-control" type="text" id="phones" placeholder="USA" name="phones" value="{{form.phones.value}}"></div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group mb-3"><button class="btn btn-primary btn-sm" type="submit" style="border-color: #ec8f00;background: #ec8f00;">Save&nbsp;Settings</button></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        {%include 'management/footer.html'%}
+    </div>
+    <a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
+{% endblock%}

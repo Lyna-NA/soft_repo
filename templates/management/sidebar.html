@@ -1,0 +1,32 @@
+{% load static %}
+{% load user_tags %}
+
+<nav class="navbar navbar-dark align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0" style="background: #292929;">
+    <div class="container-fluid d-flex flex-column p-0"><a class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" href="#">
+            <div class="sidebar-brand-icon rotate-n-15"><i class="fas fa-book-open"></i></div>
+            <div class="sidebar-brand-text mx-3"><span>EL madina</span></div>
+        </a>
+        <hr class="sidebar-divider my-0">
+        <ul class="navbar-nav text-light" id="accordionSidebar-1">
+        
+            <li class="nav-item"><a class="nav-link"  href="{% url 'home'%}"><i class="fa fa-users"></i><span>Dashboard</span></a></li>
+            {% if request.user|has_group:"manager"%}
+            <li class="nav-item"><a class="nav-link"  href="{% url 'profile'%}"><i class="fa fa-users"></i><span>Profile</span></a></li>
+            {% endif %}
+            {% if request.user|has_group:"manager" or request.user|has_group:"admin"  %}   
+            <li class="nav-item"><a class="nav-link"  href="{% url 'booksList'%}"><i class="fas fa-layer-group"></i><span>Books List</span></a></li>
+            <li class="nav-item"><a class="nav-link"  href="{% url 'customersList'%}"><i class="fa fa-users"></i><span>Customers List</span></a></li>
+            <li class="nav-item"><a class="nav-link"  href="{% url 'managersList'%}"><i class="fa fa-users"></i><span>Managers List</span></a></li>
+            <li class="nav-item"><a class="nav-link" href="{% url 'issuesList'%}"><i class="fa fa-gears"></i><span>Issues List</span></a></li>
+            <li class="nav-item"><a class="nav-link" href="#"><i class="fa fa-gears"></i><span>General Settings</span></a></li>
+            {% endif %} 
+            {% if request.user|has_group:"manager"%}  
+            <li class="nav-item"><a class="nav-link" href="{% url 'createIssue'%}"><i class="fas fa-layer-group"></i><span>Create Issue</span></a></li> 
+            {% endif %} 
+            <li class="nav-item"><a class="nav-link" href="{% url 'logout'%}"><i class="fas fa-external-link-alt" style="color: #ec8f00 !important;"></i><span style="color: #ec8f00 !important;">Logout</span></a></li>
+       
+
+        </ul>
+        <div class="text-center d-none d-md-inline"><button class="btn rounded-circle border-0" id="sidebarToggle-1" type="button"></button></div>
+    </div>
+</nav>

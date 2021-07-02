@@ -1,0 +1,111 @@
+{% extends 'userSide/nav.html'%} {% load static %} {% block content%}
+
+<section id="facts" class="wow fadeIn" style="margin-top: 100px;margin-bottom: 100px;">
+    <div class="container">
+
+        <header class="section-header">
+            <h3>Books Info</h3>
+
+        </header>
+
+        <div class="container-fluid">
+
+            <div class="row mb-3">
+                <div class="col-lg-4">
+                    <div class="card mb-3">
+                        <div class="card-body text-center shadow">
+                            <img class="img-thumbnail mb-3 mt-4" src="{{ book_id.bookPhoto.url }}" width="200\" height="200" style="border-radius: 0%;">
+                            <div class="mb-3"></div>
+                        </div>
+                    </div>
+                    <div class="card shadow mb-4"></div>
+                </div>
+                <div class="col-lg-8">
+
+                    <div class="col">
+
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="card shadow mb-3">
+                                <div class="card-header py-3">
+                                    <p class="m-0 fw-bold" style="border-color: rgb(59,12,6);color: #F2AE30;">User Settings</p>
+                                </div>
+                                <div class="card-body">
+                                    <form>
+
+                                        <div class="row">
+                                            <div class="col">
+
+
+
+                                                <div class="mb-3"><label class="form-label" for="username"><strong>ISBN : </strong></label>
+                                                    <label class="form-label" for="username">          {{book_id.isbn}}</label>
+                                                </div>
+                                                <div class="mb-3"><label class="form-label" for="username"><strong>Title : </strong></label>
+                                                    <label class="form-label" for="username">{{book_id.title}}</label>
+                                                </div>
+                                                <div class="mb-3"><label class="form-label" for="username"><strong>Authors : </strong></label>
+                                                    <label class="form-label" for="username">{{book_id.author_name}}</label></div>
+                                                <div class="mb-3"><label class="form-label" for="username"><strong>Language : </strong></label>
+                                                    <label class="form-label" for="username">{{book_id.language}}</label></div>
+                                                <div class="mb-3"><label class="form-label" for="username"><strong>Description : </strong></label>
+                                                    <label class="form-label" for="username">{{book_id.description}}</label></div>
+                                            </div>
+                                        </div>
+                                        <div class="mb-3"></div>
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="card shadow">
+                                <div class="card-header py-3">
+                                    <p class="text-primary m-0 fw-bold" style="color: #F2AE30!important;border-color: #F2AE30;">
+                                        Version Info</p>
+                                </div>
+                                <div class="card-body">
+                                    <form>
+                                        <div class="mb-3"><label class="form-label" for="address"><strong>Version
+                                                    number : </strong></label> <label class="form-label" for="username">{{book_id.version_number}}</label></div>
+                                        <div class="mb-3"><label class="form-label" for="address"><strong>Year :  </strong><br></label><label class="form-label" for="username">{{book_id.year}}</label>
+                                        </div>
+                                        <div class="mb-3"><label class="form-label" for="address"><strong>Amount : </strong></label><label class="form-label" for="username">{{book_id.description}}</label></div>
+                                        <div class="row">
+                                            <div class="col">
+                                                <div class="mb-3"><label class="form-label" for="country"><strong>Condition : </strong></label>
+                                                    <label class="form-label" for="username">{{book_id.condition}}</label></div>
+                                            </div>
+                                        </div>
+                                        <div class="mb-3"></div>
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="card shadow" style="margin-top: 16px;">
+                                <div class="card-header py-3">
+                                    <p class="text-primary m-0 fw-bold" style="color: #F2AE30!important;">Book position</p>
+                                </div>
+                                <div class="card-body">
+                                    <form>
+                                        <div class="mb-3"><label class="form-label" for="currentpassword"><strong>category : </strong></label>
+                                            <label class="form-label" for="username">{{book_id.book_seat.cat_id}}</label></div>
+                                        <div class="row">
+                                            <div class="col">
+                                                <div class="mb-3"><label class="form-label" for="country"><strong>shelf : </strong></label>
+                                                    <label class="form-label" for="username">{{book_id.book_seat.shelf_id}}</label></div>
+                                                <div class="mb-3"><label class="form-label" for="country"><strong>floor : </strong><br></label>
+                                                    <label class="form-label" for="username">{{book_id.book_seat.floor_id}}</label></div>
+                                            </div>
+                                        </div>
+                                        <div class="mb-3"></div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card shadow mb-5"></div>
+        </div>
+
+
+    </div>
+</section>{% endblock %}

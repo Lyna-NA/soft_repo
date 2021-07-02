@@ -1,0 +1,75 @@
+{% extends 'userSide/nav.html'%} {% load static %} {% block content%}
+
+<section id="facts" class="wow fadeIn" style="margin-top: 100px;margin-bottom: 100px;">
+    <div class="container">
+
+        <header class="section-header">
+            <h3>Sign UP</h3>
+            
+        </header>
+
+        <div class="section-header">
+
+            <form method="post" action="{% url 'signup'  %}" >
+                {% csrf_token %}
+        
+                 
+        
+                <div class="mb-3">
+                    <input class="form-control" type="text" name="username" placeholder="username" style="margin-bottom: 10px;" required="">
+                    <input class="form-control" type="email" name="email" placeholder="Email" style="margin-bottom: 10px;" required="">
+                    <input class="form-control" type="password" name="password" placeholder="Password"style="margin-bottom: 10px;" required="" minlength="8">
+                    <input class="form-control" type="password" name="password2" placeholder="repeate Password"style="margin-bottom: 10px;" required="" minlength="8">
+        
+        
+                </div>
+        
+                <div class="mb-3" style="text-align: center;align-items: center;">
+                    <button class="btn btn-primary d-block w-100" type="submit" style="margin-left: 0px;background: rgb(236, 143, 0);">Sign Up</button>
+                </div>
+        
+                <a class="forgot" href="" style="text-align: center;"><br>You already have an account? Login here.<br><br></a>
+            </form>
+
+        </div>
+
+        
+
+    </div>
+</section>
+
+
+
+
+{% endblock %}
+<!-- <h1>Register</h1>
+
+<form method="POST" action="">
+   {% csrf_token %}
+   {% comment %} {{form.as_p}} {% endcomment %}
+
+ 
+{{form.username.label}}
+ {{form.username}} 
+
+     {{form.email.label}}
+    {{form.email}} <br>
+
+     {{form.password1.label}}
+    {{form.password1}} <br>
+
+     {{form.password2.label}}
+    {{form.password2}} <br>
+
+    <script src="https://www.google.com/recaptcha/api.js"></script>
+    <div class="g-recaptcha" data-sitekey="6Ldq_9AZAAAAANXoYHNla9SJosforXZyX8wr3wj5"></div>
+
+  <button type="submit" class="btn btn-primary">Submit</button>
+
+  <br>
+
+ {{form.errors}} 
+  <br>
+
+  <a href="{% url 'login'%}">Login page</a>
+</form> -->

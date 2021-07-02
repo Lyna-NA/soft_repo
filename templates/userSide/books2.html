@@ -1,0 +1,89 @@
+{% extends 'userSide/nav.html'%} {% load static %} {% block content%}
+
+<section id="facts" class="wow fadeIn" style="margin-top: 100px;margin-bottom: 100px;">
+    <div class="container">
+
+        <header class="section-header">
+            <h3>Books List</h3>
+
+        </header>
+
+        <div class="card shadow">
+
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6 text-nowrap">
+                        <div id="dataTable_length" class="dataTables_length" aria-controls="dataTable"><label class="form-label">Show&nbsp;<select class="d-inline-block form-select form-select-sm">
+                                    <option value="10" selected="">10</option>
+                                    <option value="25">25</option>
+                                    <option value="50">50</option>
+                                    <option value="100">100</option>
+                                </select>&nbsp;</label></div>
+                    </div>
+                    <div class="col-md-6">
+                        <form action="{% url 'books2' %}">
+                            <div class="text-md-end dataTables_filter" id="dataTable_filter"><label class="form-label"><input
+                                    type="search"  name ="searchname" class="form-control form-control-sm" aria-controls="dataTable"
+                                    placeholder="Search by Isbn.."></label>
+                                <button class="btn btn-primary btn-sm" type="submit" style="background: #F2AE30;border-color: #F2AE30;text-align: right; ">Search</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="table-responsive table mt-2" id="dataTable" role="grid" aria-describedby="dataTable_info">
+                    <table class="table my-0" id="dataTable">
+                        <thead>
+                            <tr>
+                                <th>ISBN</th>
+                                <th>Title</th>
+                                <th>Authors</th>
+
+                                <th>Version</th>
+                                <th>status</th>
+                                <th>View</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for item in books %}
+                            <tr>
+                                <td><img class="rounded-circle me-2" width="30" height="30" src="{{ item.bookPhoto.url }}">{{ item.isbn }}</td>
+                                <td>{{item.title}}</td>
+                                <td>{{item.author_name}}</td>
+
+                                <td>{{item.version_number}}</td>
+                                <td>{{item.status }}</td>
+                                <td><a href="{% url 'bookInfo2' item.book_id %}">view book info</a></td>
+                            </tr>
+                            {% endfor %}
+
+                        </tbody>
+                        <tfoot>
+                            <tr></tr>
+                        </tfoot>
+                    </table>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 align-self-center">
+                        <p id="dataTable_info" class="dataTables_info" role="status" aria-live="polite">Showing 1 to 10 of 27
+                        </p>
+                    </div>
+                    <div class="col-md-6">
+                        <nav class="d-lg-flex justify-content-lg-end dataTables_paginate paging_simple_numbers">
+                            <ul class="pagination">
+                                <li class="page-item disabled"><a class="page-link" href="#" aria-label="Previous"><span
+                                            aria-hidden="true">«</span></a></li>
+                                <li class="page-item active" style="background-color: #F2AE30 !important;"><a class="page-link" href="#">1</a></li>
+                                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                <li class="page-item"><a class="page-link" href="#" aria-label="Next"><span
+                                            aria-hidden="true">»</span></a></li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</section>{% endblock %}
