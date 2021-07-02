@@ -88,6 +88,7 @@ class BookPosition(models.Model):
 
 
 class Book(models.Model):
+    book_id=models.AutoField(primary_key=True)
     isbn =ISBNField()
     book_seat =models.ForeignKey(BookPosition,on_delete=models.CASCADE,default="")
     title =models.CharField(max_length=40,default="")
@@ -127,7 +128,7 @@ class Book(models.Model):
 
 class Issue(models.Model):
     issue_id=models.AutoField(primary_key=True)
-    id = models.ForeignKey(Book, on_delete=models.CASCADE)
+    book_id = models.ForeignKey(Book, on_delete=models.CASCADE)
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE,default="")
     manager = models.ForeignKey(Manager,null=True, on_delete=models.SET_NULL)
     issue_date = models.DateField(auto_now=False, auto_now_add=True,null=True)
